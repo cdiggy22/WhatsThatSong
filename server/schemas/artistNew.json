@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "artist_id": 2,
+            "name": "Yo Gotti",
+            "country": "united states"
+        }
+    ],
+    "required": [
+        "artist_id",
+        "name",
+        "country"
+    ],
+    "properties": {
+        "artist_id": {
+            "$id": "#/properties/artist_id",
+            "type": "integer",
+            "title": "The artist_id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+                2
+            ]
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "Yo Gotti"
+            ]
+        },
+        "country": {
+            "$id": "#/properties/country",
+            "type": "string",
+            "title": "The country schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "united states"
+            ]
+        }
+    },
+    "additionalProperties": true
+}

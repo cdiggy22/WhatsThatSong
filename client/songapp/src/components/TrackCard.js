@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 
 
 
-const Track = (props) => {
+const TrackCard = (props) => {
     const { track } = props;
 
     return (
         <div className="col-md-6">
             <div className="card mb-4 shadow-sm"> 
                 <div className = "card-body">
-                    {/* console.log({track}); */}
+                    console.log({track});
                     <h3>
                         Track: {track.track_name}
                     </h3>
@@ -35,4 +35,4 @@ const Track = (props) => {
         </div>
     )
 }
-export default Track;
+export default TrackCard;

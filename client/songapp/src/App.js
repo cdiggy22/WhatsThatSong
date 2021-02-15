@@ -1,45 +1,57 @@
-// import logo from './logo.svg';
-import './App.css';
-import React, {useState, useEffect, useCallback} from "react";
-import Track from './components/Track';
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { decode } from "jsonwebtoken";
+import useLocalStorage from "./hooks/LocalStorage";
+import Navbar from "./components/Navbar";
+import Routes from "./components/Routes";
+import LyricsApi from "../src/components/LyricsApi";
+import Home from "./components/Homepage";
+import UserContext from "./UserContext";
+
+export const TOKEN_STORAGE_ID = "lyrics-token";
 
 function App() {
-  const [lyrics, setLyrics] = useState('');
-  const [track_list, setTrack_List] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [infoLoaded, setInfoLoaded] = useState(false);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
+  useEffect(() => {
+    async function retrieveUser() {
+      try{
+        let { username } = decode(token);
+        let currentUser = await LyricsApi.getCurrentUser(username);
+        setCurrentUser(currentUser)
+      } catch (e) {
+        setCurrentUser(null);
+      }
+      setInfoLoaded(true)
+    
+    }
+    setInfoLoaded(false)
+    retrieveUser();
+  }, [token])
 
-  const getTracks = () => {
-    fetch('/api/track/' + lyrics, {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    })
-    .then(result => result.json())
-    .then(body => setTrack_List(body))
-
+  const handleLogOut = () => {
+    setCurrentUser('noToken');
+    setToken(null);
   };
 
+  if(!infoLoaded) {
+    return "Loading...."
+  }
 
   return (
-    <div className="app">
-      <h1>What's That Song</h1>
-      <input value={lyrics} onChange={e => setLyrics(e.target.value)} />
-      <button onClick={getTracks}>Find Tracks</button>
-    
-      {track_list.length === 0 ? 
-      <p> Sorry, No results</p> 
-       : track_list.forEach(item => {
-       <div>
-          <p>Track:</p>
-          {/* <Track key={item.track.track_id} track={item.track} /> */}
+    <BrowserRouter>
+      <UserContext.Provider value={{ currentUser, setCurrentUser, handleLogOut }}>
+        <div className="App">
+          <Navbar logout={handleLogOut}>
+          
+          </Navbar>
+          <Routes setToken={token}></Routes>
+         
         </div>
-        console.log(item.track.track_name)
-      })}
-
-
-    </div>
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 

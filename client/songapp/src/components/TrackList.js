@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 // import { Context } from '../../context';
-import Track from "../components/Track";
+import Track from "../components/Tracks";
 
 
 
 
-const Tracks = () => {
+
+const TrackList = () => {
     // const [state] = useContext(Context);
     const [track_list, setTrack_List] = useState([]);
         return (
             <>
-                <h3 className="text-center mb-4">{heading}</h3>
+                <h3 className="text-center mb-4">Tracks</h3>
                 <div className="row">
-                {track_list.map(item => (
-                    <Track key={item.track.track_id} track={item.track} />
-                ))}
                 
+                 {track_list.length === 0 ? 
+                    <p> Sorry, No results</p> 
+                    : track_list.forEach(item => {
+                    <div>
+                        <p>Track:</p>
+                        <Track key={item.track.track_id} track={item.track} />
+                    </div>
+                     console.log(item.track.track_name)
+                    })};           
                 </div>
             </>
-            // <Consumer>
-            //     {value => {
-            //         console.log(value);
-            //         return <h1>Tracks Listed</h1>
-            //     }}
-            // </Consumer>
-               
         )
     
 }
 
-export default Tracks;
+export default TrackList;
