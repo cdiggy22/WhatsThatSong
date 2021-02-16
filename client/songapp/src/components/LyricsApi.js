@@ -85,6 +85,11 @@ class LyricsApi {
       let res = await this.request(`search/tracks/${lyrics}`);
       return res;
   }
+// ******************* LYRICS ROUTE ****************************
+  static async getLyrics(track_id) {
+      let res = await this.request (`lyrics/track/${track_id}`);
+      return res;
+  }
 }
 
 

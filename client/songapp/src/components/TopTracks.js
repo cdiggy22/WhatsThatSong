@@ -13,25 +13,26 @@ function TopTracks (){
         async function getTracks() {
             let toptracks = await LyricsApi.topTracks();
             setTopTracks(toptracks);
-            console.log(toptracks);
-            // console.log(toptracks);
+            
         }
         getTracks();
-        console.log(toptracks)
     }, [])
 
+   const userTracks = toptracks.map( (item) => {
+    const response =  ( <div>
+         {/* <h1>Top 10 Tracks</h1> */}
+        <TrackCard key={item.track.track_id} track={item.track} />
+     </div>)
+     
+     return response;
+     } )
 
     return(
         <div>
            
-            <h2>Results</h2>
-            {toptracks.length ? toptracks.forEach(item =>{
-                <div>
-                    <h1>Top 10 Tracks</h1>
-                   <TrackCard key={item.track.track_id} track={item.track} />
-                </div>
-            } ) : <p>Sorry No Results</p>}
-          
+            <h2>Today's Top Ten Tracks</h2>
+            {toptracks.length > 0 ? <div>{userTracks}</div> : <p>Sorry No Results</p>}
+         
         </div>
     );
 

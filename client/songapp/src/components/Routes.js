@@ -3,6 +3,7 @@ import Artists from './Artists';
 import {Switch, Route} from "react-router-dom";
 import Home from './Homepage';
 import Tracks from './Tracks';
+import Lyrics from './Lyrics';
 import Login from './Login';
 // import Profile from './Profile';
 
@@ -26,6 +27,10 @@ function Routes ({setToken}) {
 
             <Route exact path = "/artists">
                 <Artists/>
+            </Route>
+
+            <Route exact path = "search/lyrics/">
+                <Lyrics/>
             </Route>
         </Switch>
 

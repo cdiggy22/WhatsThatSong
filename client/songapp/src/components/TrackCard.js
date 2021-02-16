@@ -9,10 +9,11 @@ const TrackCard = (props) => {
     const { track } = props;
 
     return (
+        
         <div className="col-md-6">
             <div className="card mb-4 shadow-sm"> 
                 <div className = "card-body">
-                    console.log({track});
+                    
                     <h3>
                         Track: {track.track_name}
                     </h3>
@@ -24,7 +25,7 @@ const TrackCard = (props) => {
                     </p>
                     
                     <Link
-                        to={`lyrics/track/${track.track_id}`}
+                        to={`search/lyrics/${track.track_id}`}
                             className="btn btn-dark btn-block"
                     >
                     <i className="fas fa-chevron-right" /> View Lyrics
@@ -33,6 +34,7 @@ const TrackCard = (props) => {
                 </div> 
             </div> 
         </div>
+        
     )
 }
 export default TrackCard;

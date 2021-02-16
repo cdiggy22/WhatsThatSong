@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import UserContext from ".././UserContext";
 import CardList from "./CardList";
 import TopTracks from "./TopTracks";
+import Search from "./Search";
 
 
 function Home() {
@@ -19,6 +20,7 @@ function Home() {
             :
               <h1 class="display-4">Find and save your favorie tracks here </h1>
             }
+        <Search/>
         </div>
         <TopTracks/>
     </div>    
